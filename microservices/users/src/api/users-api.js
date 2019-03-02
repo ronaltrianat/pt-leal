@@ -6,7 +6,7 @@ module.exports = (app, options) => {
 
     app.post('/users/user', (req, res, next) => {
         repo.createUser(req.body).then(results => {
-          res.status(status.OK).json(results)
+          res.status(status.CREATED).json(results)
         }).catch(next)
     })
 
