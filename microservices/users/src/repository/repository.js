@@ -1,16 +1,18 @@
 'use strict'
 var md5 = require('md5');
+const bcrypt = require('bcrypt');
 
 const repository = (db) => {
 
     const CREATE_OK = { code: 1, message: 'User created successfully.' }
     const DUPLICATE_USER = 'ER_DUP_ENTRY';
+    const SALT_ROUNDS = 10;
 
     const createUser = (user) => {
 
         return new Promise((resolve, reject) => {
 
-            let obj = { ...user, user_id: md5(user.email) }
+            let obj = { ...user, user_id: md5(user.email), password: bcrypt.hashSync(user.password, SALT_ROUNDS) }
 
             db.query('INSERT INTO users SET ?', obj, function (error, results, fields) {
                 if (error) {
