@@ -1,0 +1,22 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "Microservico para las operaciones de login.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec src/**/*.spec.js",
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "login"
+  ],
+  "author": "Ronal Alberto Triana Tarazona",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.4",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "http-status": "^1.3.1",
+    "mysql": "^2.16.0"
+  }
+}
