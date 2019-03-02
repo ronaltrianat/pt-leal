@@ -1,3 +1,7 @@
 ### node mudules ###
 /microservices/users/node_modules/
+/microservices/login/node_modules/
+/microservices/points/node_modules/
+/microservices/transactions/node_modules/
+/microservices/reports/node_modules/
 .DS_Store
