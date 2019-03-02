@@ -1,2 +1,3 @@
 ### node mudules ###
 /microservices/users/node_modules/
+.DS_Store
