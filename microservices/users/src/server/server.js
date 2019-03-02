@@ -1,6 +1,7 @@
 const express = require('express')
 var bodyParser = require('body-parser')
 const api = require('../api/users-api')
+const status = require('http-status')
 
 const start = (options) => {
     return new Promise((resolve, reject) => {
@@ -22,7 +23,7 @@ const start = (options) => {
         
         app.use((err, req, res, next) => {
             reject(new Error('Something went wrong!, err:' + err))
-            res.status(500).send('Something went wrong!')
+            res.status(status.INTERNAL_SERVER_ERROR).send('Something went wrong!')
         })
 
         api(app, options)
