@@ -12,9 +12,10 @@ const repository = (db) => {
 
         return new Promise((resolve, reject) => {
 
+            let query = 'INSERT INTO users SET ?'
             let obj = { ...user, user_id: md5(user.email), password: bcrypt.hashSync(user.password, SALT_ROUNDS) }
 
-            db.query('INSERT INTO users SET ?', obj, function (error, results, fields) {
+            db.query(query, obj, function (error, results, fields) {
                 if (error) {
                     if(error.code === DUPLICATE_USER) {
                         reject(new Error(`The user with email ${obj.email}, already exists.`));
