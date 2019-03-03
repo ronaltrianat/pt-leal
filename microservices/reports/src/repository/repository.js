@@ -1,6 +1,7 @@
 'use strict'
 
 var excelUtils = require('../utils/excel-utils');
+var s3Utils = require('../utils/s3-utils');
 
 const repository = (db) => {
     
@@ -17,8 +18,8 @@ const repository = (db) => {
                      inner join users u on u.user_id = t.fk_user_id`
 
         let rows = await db.query(query)
-        let response = await excelUtils.generateExcel(rows)
-        console.log(response);
+        let file = await excelUtils.generateExcel(rows)
+        let response = await s3Utils.uploadFileS3(file)
         
         return response
     }

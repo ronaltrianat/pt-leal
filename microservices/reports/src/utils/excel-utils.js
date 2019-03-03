@@ -1,16 +1,6 @@
 'use strict'
 
 var excel = require('exceljs');
-var AWS = require('aws-sdk');
-
-
-const s3 = new AWS.S3({
-    credentials: {
-      accessKeyId: 'AKIAIEVP3BGBWZTXF6RQ',
-      secretAccessKey: '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',
-    }
-});
-
 
 const generateExcel = (data) => {
 
@@ -27,17 +17,7 @@ const generateExcel = (data) => {
             })
     
             workbook.xlsx.writeBuffer().then(function(buffer) {
-
-                let keyObject = `${new Date().getTime()}.xlsx`
-
-                s3.putObject({
-                    Bucket: 'leal-reports-pt',
-                    Key: keyObject,
-                    Body: buffer.toString('base64'),
-                    }, function (resp) {
-                        let response = { file : `https://s3.amazonaws.com/leal-reports-pt/${keyObject}`}
-                        resolve(response)
-                    });
+                resolve(buffer.toString('base64'))
             });
         
         } catch (error) {
@@ -45,6 +25,5 @@ const generateExcel = (data) => {
         }
     });    
 }
-
 
 module.exports = Object.assign({}, {generateExcel})
