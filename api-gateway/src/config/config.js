@@ -6,4 +6,9 @@ const endpointsSettings = {
     users: process.env.ENDPOINT_USERS || 'http://localhost:4200'
 }
 
-module.exports = Object.assign({}, { endpointsSettings })
+const jwtSettings = {
+    api_secret: process.env.API_SECRET || 'qweqweqwe',
+    token_expiration: process.env.TOKEN_EXPIRATION || 2 * 30
+}
+
+module.exports = Object.assign({}, { endpointsSettings, jwtSettings })

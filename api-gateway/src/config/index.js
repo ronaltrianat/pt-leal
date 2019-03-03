@@ -1,4 +1,4 @@
-const { endpointsSettings } = require('./config')
+const { endpointsSettings, jwtSettings } = require('./config')
 
-module.exports = Object.assign({}, { endpointsSettings })
+module.exports = Object.assign({}, { endpointsSettings, jwtSettings })
 
