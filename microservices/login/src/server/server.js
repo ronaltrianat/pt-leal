@@ -2,6 +2,9 @@ const express = require('express')
 var bodyParser = require('body-parser')
 const api = require('../api/login-api')
 const status = require('http-status')
+const morgan = require('morgan')
+const helmet = require('helmet')
+
 
 const start = (options) => {
     return new Promise((resolve, reject) => {
@@ -15,6 +18,9 @@ const start = (options) => {
         }
 
         const app = express()
+        app.use(morgan('dev'))
+        app.use(helmet())
+        
         // parse application/x-www-form-urlencoded
         app.use(bodyParser.urlencoded({ extended: true }))
 
