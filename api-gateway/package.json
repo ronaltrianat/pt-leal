@@ -1,0 +1,20 @@
+{
+  "name": "api-gateway",
+  "version": "1.0.0",
+  "description": "Api Gateway Leal PT",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec src/**/*.spec.js",
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "api-gateway"
+  ],
+  "author": "Ronal Alberto Triana Tarazona",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}
