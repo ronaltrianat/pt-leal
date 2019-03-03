@@ -7,8 +7,12 @@ const endpointsSettings = {
 }
 
 const jwtSettings = {
-    api_secret: process.env.API_SECRET || 'qweqweqwe',
-    token_expiration: process.env.TOKEN_EXPIRATION || 2 * 30
+    api_secret: process.env.API_SECRET || '439fcd06-9dff-478b-855b-d878ee999724',
+    token_expiration: process.env.TOKEN_EXPIRATION || 30 * 30
 }
 
-module.exports = Object.assign({}, { endpointsSettings, jwtSettings })
+const serverSettings = {
+    port: process.env.PORT || 3000
+}
+
+module.exports = Object.assign({}, { endpointsSettings, jwtSettings, serverSettings })
