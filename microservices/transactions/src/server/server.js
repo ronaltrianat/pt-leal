@@ -6,11 +6,11 @@ const status = require('http-status')
 const start = (options) => {
     return new Promise((resolve, reject) => {
 
-        if (!options.repo) {
+        if (!options.hasOwnProperty('repo')) {
             reject(new Error('The server must be started with a connected repository'))
         }
         
-        if (!options.port) {
+        if (!options.hasOwnProperty('port')) {
             reject(new Error('The server must be started with an available port'))
         }
 
