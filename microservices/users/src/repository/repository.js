@@ -5,7 +5,8 @@ const bcrypt = require('bcrypt');
 const repository = (db) => {
 
     const CREATE_OK = { code: 1, message: 'User created successfully.' }
-    const DUPLICATE_USER = 'ER_DUP_ENTRY';
+    const DUPLICATE_USER = { code: -1, message: 'The user with the received email already exists.'}
+    const CODE_DUPLICATE_USER = 'ER_DUP_ENTRY';
     const SALT_ROUNDS = 10;
 
     const createUser = (user) => {
@@ -17,13 +18,14 @@ const repository = (db) => {
 
             db.query(query, obj, function (error, results, fields) {
                 if (error) {
-                    if(error.code === DUPLICATE_USER) {
-                        reject(new Error(`The user with email ${obj.email}, already exists.`));
+                    if(error.code === CODE_DUPLICATE_USER) {
+                        resolve(DUPLICATE_USER)
                     } else {
-                        reject(error);
+                        reject(error)
                     } 
+                } else {
+                    resolve(CREATE_OK)
                 }
-                resolve(CREATE_OK)
             });
         })
     }
