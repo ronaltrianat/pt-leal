@@ -17,7 +17,7 @@ const repository = (db) => {
 
             let query = 'INSERT INTO transactions SET ?'
             let obj = { ...transaction, fk_user_id: md5(transaction.user_id) }
-            delete obj.user_id
+            Reflect.deleteProperty(obj, 'user_id')
 
             db.query(query, obj, function (error, results, fields) {
                 if (error) {
