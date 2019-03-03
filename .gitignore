@@ -4,4 +4,5 @@
 /microservices/points/node_modules/
 /microservices/transactions/node_modules/
 /microservices/reports/node_modules/
+/api-gateway/node_modules/
 .DS_Store
