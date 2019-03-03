@@ -17,7 +17,7 @@ const generateExcel = (data) => {
             })
     
             workbook.xlsx.writeBuffer().then(function(buffer) {
-                resolve(buffer.toString('base64'))
+                resolve(buffer)
             });
         
         } catch (error) {
