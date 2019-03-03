@@ -12,8 +12,8 @@ const serverSettings = {
 
 const S3Settings = {
     credentials: {
-        accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID || 'AKIAIHBEOJBHIQSEBOIA',
-        secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY || '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'
+        accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY
     },
     bucketReports: process.env.BUCKET_REPORTS || 'leal-reports-pt',
     endpointReports: process.env.ENDPOINT_REPORTS || 'https://s3.amazonaws.com/leal-reports-pt/',
