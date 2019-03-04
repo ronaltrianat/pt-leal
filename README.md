@@ -67,3 +67,15 @@ Se deben configurar las siguientes variables de entorno con las politicas de acc
 
 - export AWS_S3_ACCESS_KEY_ID="access_key_id"
 - export AWS_S3_SECRET_ACCESS_KEY="secret_access_key"
+
+
+### Archivos de Configuracion
+
+Todos los proyectos tienen archivos de configuracion en el directorio /config con propiedades porm defecto y que pueden ser inyectadas como variables de entorno.
+
+
+### Cifrado Request
+
+En el momento solo se esta cifrando el request de Login. Se utilizan llaves que estan en el archivo de configuracion. Pueden ser inyectadas como variables de entorno. No es la manera mas sofisticada pero como solucion y demostracion es valido.
+
+### Diagrama
