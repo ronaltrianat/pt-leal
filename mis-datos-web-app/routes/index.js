@@ -5,6 +5,8 @@ var loginUtil = require('../utils/login-utils')
 var userUtil = require('../utils/users-utils')
 var transactionsUtil = require('../utils/transactions-utils')
 var pointsUtil = require('../utils/points-utils')
+var reportsUtil = require('../utils/reports-utils')
+var open = require('open')
 
 var sessionChecker = (req, res, next) => {
   if (store.get('user_key') && store.get('user_key').token) {
@@ -129,5 +131,18 @@ router.post('/get-points', async (req, res) => {
   }
 
 })
+
+router.post('/generate-report', async (req, res) => {
+
+  try {
+    let response = await reportsUtil.generateReport()
+    open(response)
+    res.redirect('/dashboard')
+  } catch (error) {
+    res.redirect('/login');
+  }
+
+})
+
 
 module.exports = router;

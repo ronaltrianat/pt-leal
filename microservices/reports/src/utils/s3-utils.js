@@ -22,7 +22,7 @@ const uploadFileS3 = (fileData) => {
                 if (err) reject(err)
                 
                 let response = { 
-                    file : `${config.S3Settings.endpointReports}${config.S3Settings.folderReports}${keyObject}`
+                    file : `${config.S3Settings.endpointReports}${keyObject}`
                 }
                 resolve(response)
             });

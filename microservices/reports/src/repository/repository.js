@@ -2,6 +2,7 @@
 
 var excelUtils = require('../utils/excel-utils');
 var s3Utils = require('../utils/s3-utils');
+var md5 = require('md5')
 
 const repository = (db) => {
     
@@ -10,14 +11,15 @@ const repository = (db) => {
      * y subirlo a un bucket de Amazon S3. Se devuelve el link de 
      * acceso al reporte.
      */
-    const generateReport = async () => {
+    const generateReport = async (user) => {
 
         let query = `select t.transaction_id, t.created_date, t.value, t.points, 
                             t.status, u.name, u.lastname, u.email
                      from transactions t
-                     inner join users u on u.user_id = t.fk_user_id`
+                     inner join users u on u.user_id = t.fk_user_id
+                     where t.fk_user_id = ?`
 
-        let rows = await db.query(query)
+        let rows = await db.query(query, [md5(user)])
         let file = await excelUtils.generateExcel(rows)
         let response = await s3Utils.uploadFileS3(file)
         

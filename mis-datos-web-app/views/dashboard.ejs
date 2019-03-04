@@ -102,13 +102,25 @@
 
             <hr>
 
+            <div class="container row">
+                <h2>Consultar Puntos</h2>
+                <h4 style="color:#FF0000"><strong><%= message %></strong></h4>
+                <div>
+                    <form action="/get-points" method="post">
+                        <div>
+                            <input class="btn btn-primary" type="submit" value="Crear Transaccion"/>
+                        </div>
+                    </form>                  
+                </div>          
+            </div>
+            <hr>
                 <div class="container row">
-                    <h2>Consultar Puntos</h2>
+                    <h2>Generar Reporte</h2>
                     <h4 style="color:#FF0000"><strong><%= message %></strong></h4>
                     <div>
-                        <form action="/get-points" method="post">
+                        <form action="/generate-report" method="post">
                             <div>
-                                <input class="btn btn-primary" type="submit" value="Crear Transaccion"/>
+                                <input class="btn btn-primary" type="submit" value="Generar Reporte"/>
                             </div>
                         </form>                  
                     </div>          
