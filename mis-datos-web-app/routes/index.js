@@ -27,7 +27,7 @@ router.get('/dashboard', (req, res, next) => {
     if(store.get('message')) message = store.get('message').message
     if(store.get('transactions')) transactions = store.get('transactions')
        
-    res.render('dashboard', { message: message, transactions: JSON.stringify(transactions) } );
+    res.render('dashboard', { message: message, transactions: transactions } );
     
   } else {
       res.redirect('/login');
@@ -135,6 +135,28 @@ router.post('/get-transactions', (req, res) => {
     })
 });
 
+
+router.post('/update-transaction', (req, res) => {
+  
+  const config = { headers: { 'Authorization': store.get('user_key').token } }
+  let url = `http://localhost:5000/transactions/transaction/state`
+
+  axios.put(url, req.body, config)
+    .then((resp) => {
+      
+      store.remove('transactions')
+      store.remove('message')
+      if(resp && resp.status === 200 && resp.data.code == 1) {
+        store.set('message', resp.data)
+        res.redirect('/dashboard');
+      } else {
+        res.redirect('/dashboard');
+      }
+    })
+    .catch((err) => {
+      res.redirect('/signup');
+    })
+});
 
 
 

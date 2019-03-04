@@ -2,9 +2,8 @@
     <head>
         <title>Login Here</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <script src='//code.jquery.com/jquery.min.js' charset='utf-8'></script>
-        <script type='text/javascript' src='/nquery.js' charset='utf-8'></script>
         <link rel="icon" href="/images/icon-50.png">
+        <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body class="container">
         <div class="page-header">
@@ -62,18 +61,43 @@
                         </div>
                     </form>                  
                 </div>    
-                <textarea name="" id="myTextarea" cols="150" rows="10"><%= transactions %></textarea>      
+                <table class="a">
+                    <tr>
+                        <th>ID_Transaccion</th><th>Fecha</th><th>Valor</th><th>Puntos</th><th>Estado</th>
+                    </tr>
+                    <% for (var i = 0; i < transactions.length; i++) { %>
+                        <tr>
+                        <td><%= transactions[i].transaction_id %></td>
+                        <td><%= transactions[i].created_date %></td>
+                        <td><%= transactions[i].value %></td>
+                        <td><%= transactions[i].points %></td>
+                        <td><%= transactions[i].status %></td>
+                        </tr>    
+                    <% } %>
+                </table>     
             </div>
 
+            <hr>
+
             <div class="container row">
-                <div>
-                    <form action="/signup" method="post">
+                <div class="container row">
+               <h4><%= message %></h4>
+                <div class="jumbotron col-sm-4 pull-center">
+                    <form action="/update-transaction" method="post">
                         <div>
-                            <input class="btn btn-primary" type="submit" value="Actualizar Estado Transaccion"/>
+                            <label>Id Transaccion:</label>
+                            <input type="number" name="transactionId"/>
+                        </div>
+                        <div>
+                            <label>Estado Transaccion( 1 | 0 ):</label>
+                            <input type="number" name="state"/>
+                        </div>
+                        <div>
+                            <input class="btn btn-primary" type="submit" value="Actualizar Transaccion"/>
                         </div>
                     </form>                  
-                </div>    
-                <textarea name="" id="myTextarea" cols="30" rows="10"><%= message %></textarea>      
+                </div>          
+            </div>      
             </div>
         </div>
     </body>
