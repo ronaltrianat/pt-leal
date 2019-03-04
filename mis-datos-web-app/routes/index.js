@@ -1,7 +1,10 @@
 var express = require('express')
 var router = express.Router()
-const axios = require('axios');
 var store = require('store')
+var loginUtil = require('../utils/login-utils')
+var userUtil = require('../utils/users-utils')
+var transactionsUtil = require('../utils/transactions-utils')
+var pointsUtil = require('../utils/points-utils')
 
 var sessionChecker = (req, res, next) => {
   if (store.get('user_key') && store.get('user_key').token) {
@@ -12,11 +15,15 @@ var sessionChecker = (req, res, next) => {
 };
 
 router.get('/', sessionChecker, (req, res, next) => {
-  res.render('login', {});
+  var message = ''
+  if(store.get('message')) message = store.get('message').message
+  res.render('login', { message: message });
 });
 
 router.get('/login', sessionChecker, (req, res, next) => {
-  res.render('login', {});
+  var message = ''
+  if(store.get('message')) message = store.get('message').message
+  res.render('login', { message: message });
 });
 
 router.get('/dashboard', (req, res, next) => {
@@ -37,7 +44,9 @@ router.get('/dashboard', (req, res, next) => {
 
 
 router.get('/signup', function(req, res, next) {
-  res.render('signup', {});
+  var message = ''
+  if(store.get('message')) message = store.get('message').message
+  res.render('signup', { message: message });
 });
 
 
@@ -49,116 +58,76 @@ router.get('/logout', function(req, res, next) {
 
 
 /** Iniciar Session **/
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   
-  const config = { headers: { 'Content-Type': 'application/json' } }
+  try {
+    let resp = await loginUtil.login(req.body)
+    if(resp === 1) res.redirect('/dashboard')
+    else res.redirect('/login')
+  } catch (error) {
+    res.redirect('/login')
+  }
   
-  axios.post('http://localhost:5000/login', req.body, config)
-    .then((resp) => {
-      
-      if(resp && resp.status === 200 && resp.data.code == 1) {
-        store.set('user_key', resp.data)
-        store.set('user_id', req.body.email)
-        res.redirect('/dashboard');
-      } else {
-        res.redirect('/login');
-      }
-    })
-    .catch((err) => {
-      res.redirect('/login');
-    })
-});
+})
 
-router.post('/signup', (req, res) => {
+/** Registrar Usuario **/
+router.post('/signup', async (req, res) => {
   
-  const config = { headers: { 'Content-Type': 'application/json' } }
+  try {
+    let resp = await userUtil.registerUser(req.body)
+    if(resp === 1) res.redirect('/login')
+    else res.redirect('/signup')
+  } catch (error) {
+    res.redirect('/signup')
+  }
 
-  axios.post('http://localhost:5000/users/user', req.body, config)
-    .then((resp) => {
-      
-      if(resp && resp.status === 201 && resp.data.code == 1) {
-        res.redirect('/login');
-      } else {
-        res.redirect('/signup');
-      }
-    })
-    .catch((err) => {
-      res.redirect('/signup');
-    })
 });
 
 
-router.post('/create-transaction', (req, res) => {
+router.post('/create-transaction', async (req, res) => {
   
-  const config = { headers: { 'Content-Type': 'application/json', 'Authorization': store.get('user_key').token } }
+  try {
+    await transactionsUtil.createTransaction(req.body)
+    res.redirect('/dashboard')
+  } catch (error) {
+    res.redirect('/login');
+  }
 
-  let body = { ...req.body, user_id: store.get('user_id')}
-  
-  axios.post('http://localhost:5000/transactions/transaction', body, config)
-    .then((resp) => {
-      
-      store.remove('message')
-      if(resp && resp.status === 200 && resp.data.code == 1) {
-        store.set('message', resp.data)
-        res.redirect('/dashboard');
-      } else {
-        res.redirect('/dashboard');
-      }
-    })
-    .catch((err) => {
-      res.redirect('/signup');
-    })
 });
 
 
-router.post('/get-transactions', (req, res) => {
+router.post('/get-transactions', async (req, res) => {
   
-  const config = { headers: { 'Authorization': store.get('user_key').token } }
-  let url = `http://localhost:5000/transactions/${store.get('user_id')}`
+  try {
+    await transactionsUtil.getTransactions()
+    res.redirect('/dashboard')
+  } catch (error) {
+    res.redirect('/login');
+  }
 
-  axios.get(url, config)
-    .then((resp) => {
-      
-      store.remove('message')
-      store.remove('transactions')
-      if(resp && resp.status === 200) {
-        console.log(resp.data);
-        
-        store.set('transactions', resp.data)
-        res.redirect('/dashboard');
-      } else {
-        res.redirect('/dashboard');
-      }
-    })
-    .catch((err) => {
-      res.redirect('/signup');
-    })
-});
+})
 
 
-router.post('/update-transaction', (req, res) => {
+router.post('/update-transaction', async (req, res) => {
   
-  const config = { headers: { 'Authorization': store.get('user_key').token } }
-  let url = `http://localhost:5000/transactions/transaction/state`
+  try {
+    await transactionsUtil.updateTransaction(req.body)
+    res.redirect('/dashboard')
+  } catch (error) {
+    res.redirect('/login');
+  }
 
-  axios.put(url, req.body, config)
-    .then((resp) => {
-      
-      store.remove('transactions')
-      store.remove('message')
-      if(resp && resp.status === 200 && resp.data.code == 1) {
-        store.set('message', resp.data)
-        res.redirect('/dashboard');
-      } else {
-        res.redirect('/dashboard');
-      }
-    })
-    .catch((err) => {
-      res.redirect('/signup');
-    })
-});
+})
 
+router.post('/get-points', async (req, res) => {
 
+  try {
+    await pointsUtil.getPoints()
+    res.redirect('/dashboard')
+  } catch (error) {
+    res.redirect('/login');
+  }
 
+})
 
 module.exports = router;
