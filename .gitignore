@@ -5,4 +5,5 @@
 /microservices/transactions/node_modules/
 /microservices/reports/node_modules/
 /api-gateway/node_modules/
+/mis-datos-web-app/node_modules/
 .DS_Store

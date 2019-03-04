@@ -13,5 +13,5 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(router)
 
 app.listen(config.serverSettings.port, () => {
-    console.log('API Gateway Listening on port 3000!');
+    console.log(`API Gateway Listening on port ${config.serverSettings.port}!`);
 });
