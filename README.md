@@ -78,4 +78,6 @@ Todos los proyectos tienen archivos de configuracion en el directorio /config co
 
 En el momento solo se esta cifrando el request de Login. Se utilizan llaves que estan en el archivo de configuracion. Pueden ser inyectadas como variables de entorno. No es la manera mas sofisticada pero como solucion y demostracion es valido.
 
-### Diagrama
+### Diagrama General
+
+![](./diagrama-general-pt.png)
