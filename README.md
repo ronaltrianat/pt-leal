@@ -18,12 +18,25 @@ Las siguientes herramientas fueron utilizadas para el desarrollo de la PT.
 - [Points Service](./microservices/points)
 - [API Gateway Service](./api-gateway)
 
-### How to run the cinema microservice
+### Como iniciar los microservicios
 
-We need to have docker installed previously.
+Debe configurar la base de datos primero.
 
 ```
-$ bash < kraken.sh
+# Crear y arrancar servidor MySQL con Docker
+docker run -d -p 3306:3306 --name='mysql-server' --env="MYSQL_ROOT_PASSWORD=password" mysql --default-authentication-plugin=mysql_native_password
+
+# Ingresar al servidor MySQL Docker
+docker exec -ti mysql-server bash
+
+# Primera Configuracion DB
+mysql -u root -p
+
+create database pt_leal_db;
+create user 'user_leal'@'%%' identified with mysql_native_password BY 'password';
+grant all privileges on pt_leal_db.* TO 'user_leal'@'%%';
+flush privileges;
+quit;
 ```
 
 This will basically install every microservice and setup the docker swarm cluster
