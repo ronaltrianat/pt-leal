@@ -39,7 +39,7 @@ flush privileges;
 quit;
 ```
 
-Mas detalle en (./scripts/database)
+Mas detalle en [Mysql Configuracion](./scripts/database)
 
 This will basically install every microservice and setup the docker swarm cluster
 
