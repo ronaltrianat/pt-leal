@@ -41,29 +41,29 @@ quit;
 
 Mas detalle en [Mysql Configuracion](./scripts/database)
 
-This will basically install every microservice and setup the docker swarm cluster
+Luego de configurar la base de datos, se debe proceder a descargar cada micro servicio y api gateway.
 
-and deploy every docker service in the swarm.
 
-To monitor the cluster in a graphic mode we can go and visit the following url: `http://192.168.99.100:9000`
+Instalar dependencias y arrancar servicios con con:
+```
+npm i --save
+npm start
+```
 
-and this will give us the rancherOS web interface.
+### Aplicacion WEB 
 
-### Blog posts
+En [Mis Datos WEB APP](./mis-datos-web-app), se creo una aplicacion sencilla para poder testear los servicios.
 
-- [Build a NodeJS cinema microservice and deploying it with docker (part 1)](https://medium.com/@cramirez92/build-a-nodejs-cinema-microservice-and-deploying-it-with-docker-part-1-7e28e25bfa8b)
-- [Build a NodeJS cinema microservice and deploying it with docker (part 2)](https://medium.com/@cramirez92/build-a-nodejs-cinema-microservice-and-deploying-it-with-docker-part-2-e05cc7b126e0)
-- [Build a NodeJS cinema booking microservice and deploying it with docker (part 3)](https://medium.com/@cramirez92/build-a-nodejs-cinema-booking-microservice-and-deploying-it-with-docker-part-3-9c384e21fbe0)
-- [Build a NodeJS cinema microservice and deploying it with docker (part 4)](https://medium.com/@cramirez92/build-a-nodejs-cinema-api-gateway-and-deploying-it-to-docker-part-4-703c2b0dd269#.en6g5buwl)
-- [Deploy a Nodejs microservices to a Docker Swarm Cluster (Docker from zero to hero)](https://medium.com/@cramirez92/deploy-a-nodejs-microservices-to-a-docker-swarm-cluster-docker-from-zero-to-hero-464fa1369ea0#.548ni3uxv)
+Para poder iniciar esta aplicacion basta con descargar y ejecutar los siguientes comandos:
 
-### LICENSE
-The MIT License (MIT)
+```
+npm i --save
+nodemon start
+```
 
-Copyright (c) 2017 Cristian Ramirez
+### Configurar Variables de Entorno Amazon S3
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Se deben configurar las siguientes variables de entorno con las politicas de acceso PUT - GET. Este bucket es utilizado para almacenar los reportes generados desde la aplicacion.
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+- export AWS_S3_ACCESS_KEY_ID="access_key_id"
+- export AWS_S3_SECRET_ACCESS_KEY="secret_access_key"
