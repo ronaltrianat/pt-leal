@@ -8,19 +8,19 @@ const api = apiAdapter(config.endpointsSettings.transactions)
 
 router.post('/transactions/transaction', isAuthorized, (req, res, next) => {
     api.post(req.path, req.body).then(resp => {
-        res.send(resp.data)
+        res.status(res.status).json(response)
     }).catch(next)
 })
 
 router.get('/transactions/:user_id', isAuthorized, (req, res, next) => {
     api.get(req.path, req.body).then(resp => {
-        res.send(resp.data)
+        res.status(res.status).json(response)
     }).catch(next)
 })
 
 router.put('/transactions/transaction/state', isAuthorized, (req, res, next) => {
     api.put(req.path, req.body).then(resp => {
-        res.send(resp.data)
+        res.status(res.status).json(response)
     }).catch(next)
 })
 

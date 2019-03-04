@@ -8,7 +8,7 @@ const api = apiAdapter(config.endpointsSettings.points)
 
 router.get('/points/:user_id', isAuthorized, (req, res, next) => {
     api.get(req.path, req.body).then(resp => {
-        res.send(resp.data)
+        res.status(res.status).json(response)
     }).catch(next)
 })
 

@@ -7,7 +7,7 @@ const api = apiAdapter(config.endpointsSettings.users)
 
 router.post('/users/user', (req, res, next) => {
     api.post(req.path, req.body).then(resp => {
-        res.send(resp.data)
+        res.status(res.status).json(resp.data)
     }).catch(next)
 })
 

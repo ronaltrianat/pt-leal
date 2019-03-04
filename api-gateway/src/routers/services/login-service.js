@@ -22,9 +22,9 @@ router.post('/login', (req, res, next) => {
             )
 
             let response = { ...resp.data, token: token }
-            res.send(response)
+            res.status(res.status).json(response)
         } else {
-            res.send(resp.data)
+            res.status(res.status).json(resp.data)
         }
     }).catch(next)
 })

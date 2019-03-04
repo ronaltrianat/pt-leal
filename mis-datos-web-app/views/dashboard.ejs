@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>Login Here</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src='//code.jquery.com/jquery.min.js' charset='utf-8'></script>
+        <script type='text/javascript' src='/nquery.js' charset='utf-8'></script>
+        <link rel="icon" href="/images/icon-50.png">
+    </head>
+    <body class="container">
+        <div class="page-header">
+            <h1>Leal PT</h1>
+        </div>
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+               
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/signup">Regístrate</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/login">Iniciar Sesión</a></li>
+                        <li><a href="/logout">Salir</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container row">
+           <h1>Transacciones</h1>
+           <div class="container row">
+               <h4><%= message %></h4>
+                <div class="jumbotron col-sm-4 pull-center">
+                    <form action="/create-transaction" method="post">
+                        <div>
+                            <label>Valor:</label>
+                            <input type="number" name="value"/>
+                        </div>
+                        <div>
+                            <label>Puntos:</label>
+                            <input type="number" name="points"/>
+                        </div>
+                        <div>
+                            <input class="btn btn-primary" type="submit" value="Crear Transaccion"/>
+                        </div>
+                    </form>                  
+                </div>          
+            </div>
+            
+            <hr>
+
+
+
+            <div class="container row">
+                <div>
+                    <form action="/signup" method="post">
+                        <div>
+                            <input class="btn btn-primary" type="submit" value="Consultar Transacciones"/>
+                        </div>
+                    </form>                  
+                </div>    
+                <textarea name="" id="myTextarea" cols="30" rows="10"><%= message %></textarea>      
+            </div>
+            <div class="container row">
+                <div>
+                    <form action="/signup" method="post">
+                        <div>
+                            <input class="btn btn-primary" type="submit" value="Actualizar Estado Transaccion"/>
+                        </div>
+                    </form>                  
+                </div>    
+                <textarea name="" id="myTextarea" cols="30" rows="10"><%= message %></textarea>      
+            </div>
+        </div>
+    </body>
+</html>
