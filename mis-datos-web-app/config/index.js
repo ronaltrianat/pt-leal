@@ -1,4 +1,4 @@
-const { endpointsSettings } = require('./config')
+const { endpointsSettings, keyPubPriFront, keyPubPriBack } = require('./config')
 
-module.exports = Object.assign({}, { endpointsSettings })
+module.exports = Object.assign({}, { endpointsSettings, keyPubPriFront, keyPubPriBack })
 

@@ -15,4 +15,15 @@ const serverSettings = {
     port: process.env.PORT || 5000
 }
 
-module.exports = Object.assign({}, { endpointsSettings, jwtSettings, serverSettings })
+// TODO: Solo para Desarrollo
+const keyPubPriFront = {
+    publicKey: 'igxxpgJF6pXNTZ73eJTRg2CwD1K1gEdHNqLUt6oWOgI='
+}
+
+// TODO: Solo para Desarrollo
+const keyPubPriBack = {
+    secretKey: 'WKJDBfqAGFekioIYHlLlOXkVSsU5qWU1Nr3GO0wRyvGsII885mgaapxgTI153HKP3OEnufJS///+vC0u9WZ8VA==',
+    publicKey: 'rCCPPOZoGmqcYEyNedxyj9zhJ7nyUv///rwtLvVmfFQ='
+}
+
+module.exports = Object.assign({}, { endpointsSettings, jwtSettings, serverSettings, keyPubPriFront, keyPubPriBack })
