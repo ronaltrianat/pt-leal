@@ -39,6 +39,8 @@ flush privileges;
 quit;
 ```
 
+Mas detalle en (./scripts/database)
+
 This will basically install every microservice and setup the docker swarm cluster
 
 and deploy every docker service in the swarm.
