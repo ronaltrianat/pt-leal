@@ -81,3 +81,12 @@ En el momento solo se esta cifrando el request de Login. Se utilizan llaves que 
 ### Diagrama General
 
 ![](./diagrama-general-pt.png)
+
+### Test Servicios
+
+Mediante la siguiente URL se puede ingresar a una Web Basica para probar los servicios:
+
+http://ec2-54-197-197-152.compute-1.amazonaws.com:3000
+
+Se debe registrar para poder iniciar Session.
+
