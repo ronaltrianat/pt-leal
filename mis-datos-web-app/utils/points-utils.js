@@ -1,8 +1,7 @@
 'use strict'
-
 const axios = require('axios')
 var store = require('store')
-
+const configGW = require('../config')
 
 const getPoints = () => {
 
@@ -12,10 +11,9 @@ const getPoints = () => {
 
         const config = { headers: { 'Authorization': store.get('user_key').token } }
 
-        let url = `http://localhost:5000/points/${store.get('user_id')}`
+        let url = `${configGW.endpointsSettings.api_gateway}/points/${store.get('user_id')}`
 
-        axios.get(url, config)
-        .then((resp) => {
+        axios.get(url, config).then((resp) => {
             store.remove('message')
             store.remove('transactions')
             if(resp && resp.status === 200) {

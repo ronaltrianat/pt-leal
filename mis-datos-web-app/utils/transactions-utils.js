@@ -1,7 +1,7 @@
 'use strict'
-
 const axios = require('axios')
 var store = require('store')
+const configGW = require('../config')
 
 const createTransaction = (data) => {
 
@@ -13,8 +13,8 @@ const createTransaction = (data) => {
 
         let body = { ...data, user_id: store.get('user_id')}
   
-        axios.post('http://localhost:5000/transactions/transaction', body, config)
-        .then((resp) => {
+        let url = `${configGW.endpointsSettings.api_gateway}/transactions/transaction`
+        axios.post(url, body, config).then((resp) => {
             store.remove('message')
             if(resp && resp.status === 200 && resp.data.code == 1) {
                 store.set('message', resp.data)
@@ -34,11 +34,9 @@ const getTransactions = () => {
 
         const config = { headers: { 'Authorization': store.get('user_key').token } }
 
-        let url = `http://localhost:5000/transactions/${store.get('user_id')}`
+        let url = `${configGW.endpointsSettings.api_gateway}/transactions/${store.get('user_id')}`
 
-        axios.get(url, config)
-        .then((resp) => {
-            
+        axios.get(url, config).then((resp) => {
             store.remove('message')
             store.remove('transactions')
             if(resp && resp.status === 200) {
@@ -59,10 +57,9 @@ const updateTransaction = (data) => {
 
         const config = { headers: { 'Authorization': store.get('user_key').token } }
 
-        let url = `http://localhost:5000/transactions/transaction/state`
+        let url = `${configGW.endpointsSettings.api_gateway}/transactions/transaction/state`
 
-        axios.put(url, data, config)
-        .then((resp) => {
+        axios.put(url, data, config).then((resp) => {
             store.remove('transactions')
             store.remove('message')
             if(resp && resp.status === 200 && resp.data.code == 1) {
