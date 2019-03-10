@@ -20,7 +20,11 @@ const repository = (db) => {
                      where t.fk_user_id = ?`
 
         let rows = await db.query(query, [md5(user)])
+
+        // generar reporte de excel y obtener binario
         let file = await excelUtils.generateExcel(rows)
+
+        // realizar carga del reporte a un bucket de Amazon S3
         let response = await s3Utils.uploadFileS3(file)
         
         return response
