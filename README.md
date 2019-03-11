@@ -1,6 +1,6 @@
 # Leal PT - Ronal Alberto Triana Tarazona
 
-Este es el repositorio de los fuentes de la prueba tecnica desarrollada para Leal.
+Este es el repositorio de los fuentes microservicios y api gateway escritos en NodeJS.
 
 ### Stack
 Las siguientes herramientas fueron utilizadas para el desarrollo de la PT.
